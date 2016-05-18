@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.NodeServices
             _commandLineArguments = commandLineArguments ?? string.Empty;
         }
         
-        public string CommandLineArguments {
+        public string CommandLineArguments
+        {
             get { return _commandLineArguments; }
             set { _commandLineArguments = value; }
         }
@@ -63,6 +64,15 @@ namespace Microsoft.AspNetCore.NodeServices
         }
 
         public abstract Task<T> Invoke<T>(NodeInvocationInfo invocationInfo);
+
+        protected void ExitNodeProcess()
+        {
+            if (_nodeProcess != null && !_nodeProcess.HasExited)
+            {
+                // TODO: Is there a more graceful way to end it? Or does this still let it perform any cleanup?
+                _nodeProcess.Kill();
+            }
+        }
 
         protected async Task EnsureReady()
         {
@@ -168,11 +178,7 @@ namespace Microsoft.AspNetCore.NodeServices
                     _entryPointScript.Dispose();
                 }
 
-                if (_nodeProcess != null && !_nodeProcess.HasExited)
-                {
-                    _nodeProcess.Kill();
-                    // TODO: Is there a more graceful way to end it? Or does this still let it perform any cleanup?
-                }
+                ExitNodeProcess();
 
                 _disposed = true;
             }
