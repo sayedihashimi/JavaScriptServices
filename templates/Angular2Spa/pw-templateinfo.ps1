@@ -8,35 +8,6 @@ $templateInfo = New-Object -TypeName psobject -Property @{
     DefaultProjectName = 'Angular2App'
     CreateNewFolder = $false
     AfterInstall = {
-        Update-PWPackagesPathInProjectFiles -slnRoot ($SolutionRoot)
-    }
-}
-
-$templateInfo | replace (
-    # TODO: customize and add extra replacements as needed
-    ('WebApplicationBasic', {"$ProjectName"}, {"$DefaultProjectName"}),
-    ('Angular2Spa', {"$ProjectName"}, {"$DefaultProjectName"}),
-    
-    # TODO: Replace with project guids from your projects, try script below
-    ('8f5cb8a9-3086-4b49-a1c2-32a9f89bca11', {"$ProjectId"}, {[System.Guid]::NewGuid()},@("*.*proj"))
-)
-
-# when the template is run any filename with the given string will be updated
-$templateInfo | update-filename (
-    # TODO: customize based on your project names
-    ,('Angular2Spa', {"$ProjectName"},$null,@('*.*proj'))
-)
-# excludes files from the template
-$templateInfo | exclude-file 'pw-*.*','*.user','*.suo','*.userosscache','project.lock.json','*.vs*scc','*.sln','_project.vstemplate'
-# excludes folders from the template
-$templateInfo | exclude-folder '.vs','artifacts','packages','bin','obj' 
-
-# This will register the template with pecan-waffle
-Set-TemplateInfo -templateInfo $templateInfo
-
-<#
-To add to speed up restore experience
-    AfterInstall = {
         Update-VisualStuidoProjects -slnRoot ($SolutionRoot)
         $projdest = $properties['FinalDestPath']
         $filetoextract = (Join-Path $projdest 'n-modules.7z')
@@ -45,7 +16,7 @@ To add to speed up restore experience
             Push-Location
 
             # see if the file has already been extracted
-            $extractdest = ([System.IO.DirectoryInfo](Join-Path $env:LOCALAPPDATA 'pecan-waffle\aur2016\nmv1')).FullName
+            $extractdest = ([System.IO.DirectoryInfo](Join-Path $env:LOCALAPPDATA 'pecan-waffle\jsang2-01\nmv1')).FullName
 
             if(-not (Test-Path $extractdest)){
                 New-Item -Path $extractdest -ItemType Directory
@@ -94,6 +65,33 @@ To add to speed up restore experience
             Pop-Location
         }        
     }
+}
+
+$templateInfo | replace (
+    # TODO: customize and add extra replacements as needed
+    ('WebApplicationBasic', {"$ProjectName"}, {"$DefaultProjectName"}),
+    ('Angular2Spa', {"$ProjectName"}, {"$DefaultProjectName"}),
+    
+    # TODO: Replace with project guids from your projects, try script below
+    ('8f5cb8a9-3086-4b49-a1c2-32a9f89bca11', {"$ProjectId"}, {[System.Guid]::NewGuid()},@("*.*proj"))
+)
+
+# when the template is run any filename with the given string will be updated
+$templateInfo | update-filename (
+    # TODO: customize based on your project names
+    ,('Angular2Spa', {"$ProjectName"},$null,@('*.*proj'))
+)
+# excludes files from the template
+$templateInfo | exclude-file 'pw-*.*','*.user','*.suo','*.userosscache','project.lock.json','*.vs*scc','*.sln','_project.vstemplate'
+# excludes folders from the template
+$templateInfo | exclude-folder '.vs','artifacts','packages','bin','obj' 
+
+# This will register the template with pecan-waffle
+Set-TemplateInfo -templateInfo $templateInfo
+
+<#
+To add to speed up restore experience
+
 #>
 
 
