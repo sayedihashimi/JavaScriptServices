@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Angular 2</Name>
+    <Description>Angular 2 project</Description>
+    <DefaultName>Angular2App</DefaultName>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>sw-file-icon.png</Icon>
+    <TemplateID>25b948b5-9d24-407f-affd-c2bb26caceea</TemplateID>
+    <!-- Indicates how many parent folders this item template should appear in -->
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  <WizardExtension>
+    <Assembly>PecanWaffle, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>PecanWaffle.PecanWizard</FullClassName>
+  </WizardExtension>
+  <TemplateContent>
+    <Project TargetFileName="$safeprojectname$.csproj" File="VsTemplateProj.csproj" ReplaceParameters="true" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005"></Project>
+    <CustomParameters xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+      <CustomParameter Name="TemplateName" Value="Angular2" />
+      <CustomParameter Name="PecanWaffleInstallBranch" Value="dev" />
+      <CustomParameter Name="ExtensionId" Value="JavaScriptServices.a0815f1c-97de-44b5-8b8e-65867c9ebe4d"/>
+      <CustomParameter Name="Item" Value="Item" />
+    </CustomParameters>
+  </TemplateContent>
+</VSTemplate>
